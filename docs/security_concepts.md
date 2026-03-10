@@ -32,3 +32,14 @@ If the client is modified, it may send impossible values such as:
 - unrealistic actions
 
 The anti-cheat system must detect such anomalies.
+
+## Speed Hack Detection
+
+The server calculates the player's movement speed using the formula:
+
+speed = distance / time
+
+If the calculated speed exceeds the maximum allowed threshold,
+the system flags the player as suspicious.
+
+This prevents clients from sending manipulated movement data.

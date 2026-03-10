@@ -1,5 +1,6 @@
 import socket
 import json
+from detection_engine import detect_speed_cheat
 
 HOST = "127.0.0.1"
 PORT = 5000
@@ -8,12 +9,14 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind((HOST, PORT))
 server.listen()
 
-print("Server started. Waiting for connection...")
+print("Server started...")
 
 conn, addr = server.accept()
-print("Connected to:", addr)
+
+print("Client connected:", addr)
 
 while True:
+
     data = conn.recv(1024)
 
     if not data:
@@ -21,8 +24,17 @@ while True:
 
     message = data.decode()
 
-    try:
-        player_data = json.loads(message)
-        print("Received player data:", player_data)
-    except:
-        print("Invalid data received")
+    player_data = json.loads(message)
+
+    player_id = player_data["player_id"]
+    x = player_data["x"]
+    y = player_data["y"]
+    timestamp = player_data["timestamp"]
+
+    cheat = detect_speed_cheat(player_id, x, y, timestamp)
+
+    if cheat:
+     print("Speed hack detected")
+
+    with open("logs/cheat_log.txt", "a") as log:
+        log.write(f"Speed cheat detected for player {player_id}\n")
