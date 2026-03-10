@@ -13,3 +13,13 @@ Features planned:
 Architecture:
 
 Client -> Network -> Server Validator -> Detection Engine -> Logs
+
+## Day 2 Progress
+
+Implemented basic client-server communication using Python sockets.
+
+The client sends player movement data in JSON format to the server.
+
+The server receives and processes the player state.
+
+This establishes the foundation for server-side anti-cheat validation.

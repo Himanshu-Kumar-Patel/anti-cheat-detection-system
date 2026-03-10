@@ -20,3 +20,15 @@ To prevent cheating, the server should validate:
 - Suspicious behavior patterns
 
 This project simulates a cheat detection system where the server analyzes player data and detects abnormal movement.
+
+Client-server communication is the foundation of multiplayer security.
+
+The server receives player movement data and must validate it.
+
+If the client is modified, it may send impossible values such as:
+
+- extremely high speed
+- instant teleport
+- unrealistic actions
+
+The anti-cheat system must detect such anomalies.
